@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="_handleIntakeOutputSortConfirm" sortDescending="true" >
+		<sortItems>
+			<ViewSettingsItem text="{i18n>TXT_PN_CATEGORY}" key="Category" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_TYPE}" key="IoTypeDes" selected="false" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

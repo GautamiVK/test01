@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <ViewSettingsDialog
+    confirm="handleSortConfirm">
+    <sortItems>
+      <ViewSettingsItem text="{i18n>TXT_SORT_PATIENT_NAME}" key="NameLabel" selected="true"/>
+       <!--  <ViewSettingsItem text="Location" key="CurrentLocation" selected="false"/>
+      <ViewSettingsItem text="Ward" key="WardId" selected="false"/> -->
+      <ViewSettingsItem text="{i18n>LBL_PATIENT_DOA}" key="DateOfAdmission" selected="false"/> 
+      <ViewSettingsItem text="{i18n>TXT_SORT_PATIENT_ID}" key="ExternalPatientId" selected="false"/> 
+    </sortItems>
+  </ViewSettingsDialog>
+</core:FragmentDefinition>

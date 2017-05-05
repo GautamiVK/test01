@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:comm="sap.ui.commons"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Dialog id="ID_PAT_DASH_LAB_RESULTS_BY_TEST_DIALOG"
+		contentWidth="50%" class="sapUiSizeCompact">
+
+		<Table id="ID_PAT_DASH_LAB_RESULTS_BY_TEST_TABL"
+			noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+			<columns>
+				<Column hAlign="Left" width="60%">
+					<Text text="{i18n>TXT_PN_DATE_AND_TIME}" />
+				</Column>
+				<Column hAlign="Center" width="40%">
+					<Text text="{i18n>TXT_LAB_RESULT_BY_TEST_VALUE}" />
+				</Column>
+			</columns>
+		</Table>
+
+		<beginButton>
+			<Button text="{i18n>TXT_CLOSE}" app:dialogType="LabResultsByTest"
+				press="onDialogClose" />
+		</beginButton>
+	</Dialog>
+
+</core:FragmentDefinition>

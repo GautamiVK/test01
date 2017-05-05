@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handleCOSettingsConfirm" sortDescending="true" >
+		<sortItems>
+			<ViewSettingsItem text="{i18n>TXT_CO_TITLE}" key="Title" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_CO_DEPARTMENT}" key="Department" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_MEDICATION_DETAIL_STATUS}" key="Status" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_PN_DATETIME}" key="CreationTimestamp" selected="true" />
+		</sortItems>
+		<!-- <groupItems>
+			<ViewSettingsItem text="{i18n>TXT_CO_DEPARTMENT}" key="Department" selected="true" />
+			<ViewSettingsItem text="{i18n>TXT_MEDICATION_DETAIL_STATUS}" key="Status" />
+		</groupItems>
+		<filterItems>
+			<ViewSettingsFilterItem text="{i18n>TXT_MEDICATION_DETAIL_STATUS}" key="Status">
+				<items>
+					<ViewSettingsItem text="{i18n>TXT_STATUS_ALL}" key="" />
+					<ViewSettingsItem text="{i18n>TXT_CO_STATUS_SAVED}" key="saved" />
+					<ViewSettingsItem text="{i18n>TXT_CO_STATUS_FINANCIALLY_CONF}" key="financially confirmed" />
+					<ViewSettingsItem text="{i18n>TXT_CO_STATUS_RELEASED}" key="released" />
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>  -->
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

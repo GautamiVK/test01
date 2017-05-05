@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handleActMedSettingsConfirm" sortDescending="true" >
+		<sortItems>
+			<ViewSettingsItem text="{i18n>TXT_DRUG}" key="DrugDesc" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_START_DATE}" key="TXT_START_DATE" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_END_DATE}" key="ToDate" selected="true" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

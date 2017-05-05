@@ -1,0 +1,64 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Panel id="ID_PAT_DASH_DOCUMENTS_PANEL" expandable="true"
+		expanded="false" headerText="{i18n>TXT_DOCUMENTS_PANEL}" width="100%" visible="{Config>isPDDocumentsPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem" active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_DOCUMENTS_PANEL}" />
+				<ToolbarSpacer />
+				<core:Icon id="ID_PAT_DASH_DOCUMENTS_INDICATOR" src="sap-icon://list"
+					visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Table id="ID_PAT_DASH_DOCUMENTS_TABL" growing="true"
+				growingThreshold="3" growingTriggerText="{i18n>LBL_LOAD_MORE_DATA}"
+				noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer />
+						<SearchField id="ID_PAT_DASH_DOCUMENTS_SEARCH"
+							liveChange="handleDocumentsSearch" placeholder="{i18n>TXT_DOCUMENT_SEARCHFIELD_PLACEHOLDER_PARAMS}"
+							width="40%" maxLength="30" selectOnFocus="false" />
+						<Select id="ID_PAT_DASH_DOCUMENTS_FILTER" change="handleDocumentsFilter"
+							width="30%" selectedKey="">
+							<items>
+								<core:Item key="" text="All" />
+								<core:Item key="In Work" text="In Work" />
+								<core:Item key="Release" text="Release" />
+							</items>
+						</Select>
+						<Button icon="sap-icon://collapse-group" press="com.ril.hn.emrpatient.util.Utility.onTableCollapse" />
+						<Button id="ID_PAT_DASH_DOCUMENTS_FULLECREEN" icon="sap-icon://full-screen"
+							press="onFullScreenBtnPress" app:fullScreenType="PatientsDocuments" enabled="true" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left"
+						>
+						<Text text="{i18n>TXT_DO_DOC_NAME}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right"
+						>
+						<Text text="{i18n>TXT_CT_CREATED_ON}" />
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left"
+						width="20%">
+						<Text visible="{device>/isPhone}" text="{i18n>TXT_APPROVAL}"
+							design="Bold" />
+					</Column>
+				</columns>
+			</Table>
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.onTableCollapseFooter" icon="sap-icon://collapse-group" />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+
+</core:FragmentDefinition>

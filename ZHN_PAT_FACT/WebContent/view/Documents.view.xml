@@ -1,0 +1,87 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:ui="sap.ca.ui" xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="com.ril.hn.emrpatient.controller.Documents"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>TXT_DOCUMENTS_PANEL}" showNavButton="true"
+		class="sapUiSizeCompact" navButtonPress="onNavBack">
+		<headerContent>
+			<Button tooltip="{i18n>TXT_CASES_AND_TIME_INTERVAL}" type="Transparent"
+				text="" icon="sap-icon://time-entry-request" press="onCaseAndTimeIntervalsPressed" />
+		</headerContent>
+		<content>
+			<ObjectHeader id="ID_PAT_DASH_OBJ_HEADER_DOCUMENTS"
+				title="{PatientHeader>NameLabel}"
+				number="{path: 'PatientHeader>Birthdate',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientAge'}"
+				numberUnit="({path: 'PatientHeader>Gender',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientGender'})"
+				iconDensityAware="false">
+				<attributes>
+					<ObjectAttribute
+						text="{i18n>TXT_SORT_PATIENT_ID} : {path: 'PatientHeader>ExternalPatientId',  formatter: 'com.ril.hn.emrpatient.util.Formatter.trimExtPatientId'}" />
+					<ObjectAttribute
+						text="{i18n>LBL_PATIENT_LOCATION} : {PatientHeader>CurrentLocation}"  visible="{Config>isPOLocationVisible}"/>
+					<ObjectAttribute
+						text="{i18n>TXT_ATTENDING_PHYSICIAN} : {PatientHeader>AttendingPhy}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'} : {path: 'PatientHeader>DateOfAdmission',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getFormattedDate'}"
+						state="None">
+					</ObjectStatus>
+					<ObjectStatus icon="sap-icon://alert" visible="{PatientHeader>Attention}"
+						state="Error">
+					</ObjectStatus>
+					<ObjectStatus id="ID_PAT_DASH_OBJ_HEADER_DOCUMENTS_TIME_FILTER"
+						text="" state="Success" visible="true">
+					</ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			<Table id="ID_PAT_DASH_DOCUMENTS_FS_TABL" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer />
+						<Select id="ID_PATIENTS_DOCUMENTS_DOCTYPE_FILTER"
+							items="{DocTypeFilterModel>/FSDocTypesData}" change="handleDocTypeFilter"
+							width="30%" selectedKey="">
+							<items>
+								<core:Item key="{DocTypeFilterModel>DocumentGroup}"
+									text="{path : 'DocTypeFilterModel>DocumentGroup' , formatter: 'com.ril.hn.emrpatient.util.Formatter.getDocDepartmentText'}" />
+							</items>
+						</Select>
+						<Select id="ID_PATIENTS_DOCUMENTS_FILTER" change="handleDocumentsFilter"
+							width="30%" selectedKey="">
+							<items>
+								<core:Item key="" text="All" />
+								<core:Item key="In Work" text="In Work" />
+								<core:Item key="Release" text="Release" />
+							</items>
+						</Select>
+						<SearchField id="ID_PATIENTS_DOCUMENTS_SEARCH"
+							liveChange="_handleDocumentsSearch" placeholder="{i18n>TXT_DOCUMENT_SEARCHFIELD_PLACEHOLDER}"
+							width="40%" maxLength="50" selectOnFocus="false" />
+						<Button press="handleSettingsDocumentsFSPressed" icon="sap-icon://sort"
+							type="Emphasized" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>TXT_DO_DOC_NAME}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>TXT_CO_DEPARTMENT}" />
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Center">
+						<Text text="{i18n>TXT_DOCUMENTS_STATUS}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<Text text="{i18n>TXT_CT_CREATED_ON}" />
+					</Column>
+					<Column hAlign="Left" width="18%">
+						<Text visible="{device>/isPhone}" text="{i18n>TXT_APPROVAL}"
+							design="Bold" />
+					</Column>
+				</columns>
+			</Table>
+
+		</content>
+	</Page>
+</core:View>

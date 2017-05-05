@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:comm="sap.ui.commons">
+	<Popover title="{i18n>TXT_ALLERGY_STATUS}" class="sapUiSizeCompact,sapUiContentPadding"
+		placement="Auto" width="100%" icon="sap-icon://bed" showHeader="true">
+		<RadioButtonGroup id="ID_PAT_DASH_ALLERGIES_STATUS_CHANGE_RADGRP"
+			columns="1" selectedIndex="0">
+			<buttons>
+				<RadioButton groupName="ALLERGIES_STATUS_CHANGE"
+					text="{i18n>TXT_NO_KNOWN_ALLERGIES}" textAlign="Left" />
+				<RadioButton groupName="ALLERGIES_STATUS_CHANGE"
+					text="{i18n>TXT_ASSESSMENT_NOT_POSSIBLE}" />
+			</buttons>
+		</RadioButtonGroup>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button press="onAllergiesStatusChangeSave" text="{i18n>TXT_SAVE}" type="Accept"/>
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

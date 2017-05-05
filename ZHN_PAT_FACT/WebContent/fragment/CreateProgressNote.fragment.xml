@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog id="ID_CREATE_PROGRESS_NOTE_DIALOG" showHeader="false"
+		contentWidth="80%">
+		<subHeader>
+			<Bar>
+				<contentMiddle>
+					<Text text="{i18n>TXT_PN_CREATE_TITLE}" />
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<f:SimpleForm maxContainerCols="1" editable="true"
+			layout="ResponsiveGridLayout" title="" labelSpanL="2" labelSpanM="2"
+			labelSpanS="12" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1"
+			visible="true">
+			<f:content>
+				<Label text="{i18n>TXT_PN_CATEGORY}" />
+				<Input type="Text" placeholder="{i18n>TXT_PN_SELECT_CATEGORY}"
+					id="ID_PROGRESS_NOTE_CATEGORY" valueHelpOnly="true" showValueHelp="true"
+					showSuggestions="true" valueHelpRequest="handleValueHelpProgressNoteCategory" />
+				<Label text="{i18n>TXT_PN_NOTE}" />
+				<TextArea placeholder="{i18n>TXT_PN_ENTER_COMMENTS}" id="ID_PROGRESS_NOTE_TEXT"
+					width="100%" rows="6" />
+				<Label text="{i18n>TXT_PN_DATE_AND_TIME}" /> <!-- <DateTimeInput type="DateTime" valueFormat="yyyy-MM-ddThh:mm:ss" placeholder="Enter 
+					Date and Time ..." id="ID_PROGRESS_NOTE_DATETIME" class="sapUiSmallMarginBottom" 
+					change="ondate" /> -->
+				<DateTimeInput type="DateTime" valueFormat="yyyy-MM-ddTHH:mm:ss"
+					displayFormat="dd.MM.yyyy HH:mm" placeholder="Enter Date and Time ..."
+					id="ID_PROGRESS_NOTE_DATETIME" class="sapUiSmallMarginBottom" />
+			</f:content>
+		</f:SimpleForm>
+		<buttons>
+			<Button text="{i18n>TXT_SAVE}" type="Accept" visible="true"
+				press="handleProgressNoteSaveButton" />
+			<Button text="{i18n>TXT_CANCEL}" type="Reject" visible="true"
+				app:dialogType="CreateProgressNote" press="onDialogClose" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,100 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="com.ril.hn.emrpatient.controller.VitalsCharts"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:suite="sap.suite.ui.commons">
+	<Page title="{i18n>TXT_VITALS_CHARTS_TITLE}" showNavButton="true"
+		class="sapUiSizeCompact" navButtonPress="onNavBack">
+		<content>
+			<ObjectHeader id="ID_PAT_DASH_OBJ_HEADER_VITALS_CHARTS"
+				title="{PatientHeader>NameLabel}"
+				number="{path: 'PatientHeader>Birthdate',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientAge'}"
+				numberUnit="({path: 'PatientHeader>Gender',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientGender'})"
+				iconDensityAware="false">
+				<attributes>
+					<ObjectAttribute
+						text="{i18n>TXT_SORT_PATIENT_ID} : {path: 'PatientHeader>ExternalPatientId',  formatter: 'com.ril.hn.emrpatient.util.Formatter.trimExtPatientId'}" />
+					<ObjectAttribute
+						text="{i18n>LBL_PATIENT_LOCATION} : {PatientHeader>CurrentLocation}"  visible="{Config>isPOLocationVisible}"/>
+					<ObjectAttribute
+						text="{i18n>TXT_ATTENDING_PHYSICIAN} : {PatientHeader>AttendingPhy}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'} : {path: 'PatientHeader>DateOfAdmission',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getFormattedDate'}"
+						state="None">
+					</ObjectStatus>
+					<ObjectStatus icon="sap-icon://alert" visible="{PatientHeader>Attention}"
+						state="Error">
+					</ObjectStatus>
+					<ObjectStatus id="ID_PAT_DASH_OBJ_HEADER_VITALS_CHARTS_TIME_FILTER"
+						text="" state="Success" visible="true">
+					</ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			<l:Grid defaultSpan="L6 M12 S12" width="auto" position="Center"
+				vSpacing="10px">
+				<l:content>
+
+					<!-- <l:Splitter height="400px" width="100%"> <l:contentAreas> <suite:ChartContainer 
+						id="ID_VITALS_CHART_CONTAINER_PAIN_SCALE" title="{i18n>TXT_SCORES_CHARTS_PAIN_SCALE_TITLE}" 
+						showFullScreen="false" showPersonalization="false" showZoom="true" showLegend="false" 
+						autoAdjustHeight="false" contentChange="attachContentChange" height="350px"> 
+						<suite:content> <suite:ChartContainerContent icon="sap-icon://line-chart" 
+						title="Pain Scale Chart"> <suite:content> -->
+					<viz:VizFrame id="ID_VITALS_CHARTS_PAIN_SCALE"
+						uiConfig="{applicationSet:'fiori'}" vizType="stacked_combination"
+						width="100%" height="350px"></viz:VizFrame>
+					<!-- </suite:content> </suite:ChartContainerContent> <suite:ChartContainerContent 
+						icon="sap-icon://table-view" title="Pain Scale Table"> <suite:content> <Table 
+						id="ID_VITALS_TABLE_PAIN_SCALE" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}" 
+						width="100%"> <columns> <Column minScreenWidth="Tablet" demandPopin="true" 
+						hAlign="Left" width="70%"> <Text text="{i18n>TXT_PN_DATETIME}" /> </Column> 
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="30%"> 
+						<Text text="{i18n>TXT_LAB_RESULT_BY_TEST_VALUE}" /> </Column> </columns> 
+						</Table> </suite:content> </suite:ChartContainerContent> </suite:content> 
+						</suite:ChartContainer> </l:contentAreas> </l:Splitter> <l:Splitter height="400px" 
+						width="100%"> <l:contentAreas> <suite:ChartContainer id="ID_VITALS_CHART_CONTAINER_RESPIRATORY_RATE" 
+						title="{i18n>TXT_VITALS_CHARTS_RESPIRATORY_RATE_TITLE}" showFullScreen="false" 
+						showPersonalization="false" showZoom="true" showLegend="false" autoAdjustHeight="false" 
+						contentChange="attachContentChange" height="350px"> <suite:content> <suite:ChartContainerContent 
+						icon="sap-icon://line-chart" title="Respiratory Rate Chart"> <suite:content> -->
+					<viz:VizFrame id="ID_VITALS_CHARTS_RESPIRATORY_RATE"
+						uiConfig="{applicationSet:'fiori'}" vizType="stacked_combination"
+						width="100%" height="350px"></viz:VizFrame>
+					<!-- </suite:content> </suite:ChartContainerContent> <suite:ChartContainerContent 
+						icon="sap-icon://table-view" title="Respiratory Rate Table"> <suite:content> 
+						<Table id="ID_VITALS_TABLE_RESPIRATORY_RATE" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}" 
+						width="100%"> <columns> <Column minScreenWidth="Tablet" demandPopin="true" 
+						hAlign="Left" width="70%"> <Text text="{i18n>TXT_PN_DATETIME}" /> </Column> 
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="30%"> 
+						<Text text="{i18n>TXT_LAB_RESULT_BY_TEST_VALUE}" /> </Column> </columns> 
+						</Table> </suite:content> </suite:ChartContainerContent> </suite:content> 
+						</suite:ChartContainer> </l:contentAreas> </l:Splitter> <l:Splitter height="400px" 
+						width="100%"> <l:contentAreas> <suite:ChartContainer id="ID_VITALS_CHART_CONTAINER_BLOOD_GLUCOSE" 
+						title="{i18n>TXT_VITALS_CHARTS_BLOOD_GLUCOSE_TITLE}" showFullScreen="false" 
+						showPersonalization="false" showZoom="true" showLegend="false" autoAdjustHeight="false" 
+						contentChange="attachContentChange" height="350px"> <suite:content> <suite:ChartContainerContent 
+						icon="sap-icon://line-chart" title="Blood Glucose Chart"> <suite:content> -->
+					<viz:VizFrame id="ID_VITALS_CHARTS_BLOOD_GLUCOSE"
+						uiConfig="{applicationSet:'fiori'}" vizType="stacked_combination"
+						width="100%" height="350px"></viz:VizFrame>
+					<!-- </suite:content> </suite:ChartContainerContent> <suite:ChartContainerContent 
+						icon="sap-icon://table-view" title="Blood Glucose Table"> <suite:content> 
+						<Table id="ID_VITALS_TABLE_BLOOD_GLUCOSE" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}" 
+						width="100%"> <columns> <Column minScreenWidth="Tablet" demandPopin="true" 
+						hAlign="Left" width="70%"> <Text text="{i18n>TXT_PN_DATETIME}" /> </Column> 
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="30%"> 
+						<Text text="{i18n>TXT_LAB_RESULT_BY_TEST_VALUE}" /> </Column> </columns> 
+						</Table> </suite:content> </suite:ChartContainerContent> </suite:content> 
+						</suite:ChartContainer> </l:contentAreas> </l:Splitter> -->
+
+					<viz:VizFrame id="ID_VITALS_CHARTS_HEIGHT_WEIGHT"
+						uiConfig="{applicationSet:'fiori'}" vizType="column"
+						width="100%" height="350px"></viz:VizFrame>
+						
+
+				</l:content>
+			</l:Grid>
+		</content>
+	</Page>
+</core:View>

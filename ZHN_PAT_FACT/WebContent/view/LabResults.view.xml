@@ -1,0 +1,56 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="com.ril.hn.emrpatient.controller.LabResults"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>TXT_LAB_RESULTS_PANEL}" showNavButton="true"
+		class="sapUiSizeCompact" navButtonPress="onNavBack">
+		<headerContent>
+			<Button tooltip="{i18n>TXT_CASES_AND_TIME_INTERVAL}" type="Transparent"
+				text="" icon="sap-icon://time-entry-request" press="onCaseAndTimeIntervalsPressed" />
+			<Button id="ID_LAB_RESULTS_FS_SCROLL_LEFT" icon="sap-icon://navigation-left-arrow"
+				press="onLeftScrollPressed" enabled="false" />
+			<Button id="ID_LAB_RESULTS_FS_SCROLL_RIGHT" icon="sap-icon://navigation-right-arrow"
+				press="onRightScrollPressed" enabled="true" />
+		</headerContent>
+		<ObjectHeader id="ID_PAT_DASH_OBJ_HEADER_LAB_RESULTS"
+			title="{PatientHeader>NameLabel}"
+			number="{path: 'PatientHeader>Birthdate',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientAge'}"
+			numberUnit="({path: 'PatientHeader>Gender',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientGender'})"
+			iconDensityAware="false">
+			<attributes>
+				<ObjectAttribute
+					text="{i18n>TXT_SORT_PATIENT_ID} : {path: 'PatientHeader>ExternalPatientId',  formatter: 'com.ril.hn.emrpatient.util.Formatter.trimExtPatientId'}" />
+				<ObjectAttribute
+					text="{i18n>LBL_PATIENT_LOCATION} : {PatientHeader>CurrentLocation}"  visible="{Config>isPOLocationVisible}"/>
+				<ObjectAttribute
+					text="{i18n>TXT_ATTENDING_PHYSICIAN} : {PatientHeader>AttendingPhy}" />
+			</attributes>
+			<statuses>
+				<ObjectStatus
+					text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'} : {path: 'PatientHeader>DateOfAdmission',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getFormattedDate'}"
+					state="None">
+				</ObjectStatus>
+				<ObjectStatus icon="sap-icon://alert" visible="{PatientHeader>Attention}"
+					state="Error">
+				</ObjectStatus>
+				<ObjectStatus id="ID_PAT_DASH_OBJ_HEADER_LAB_RESULTS_TIME_FILTER"
+					text="" state="Success" visible="true">
+				</ObjectStatus>
+			</statuses>
+		</ObjectHeader>
+		<Table id="ID_PAT_DASH_LAB_RESULTS_FS_TABL" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+			<headerToolbar>
+				<Toolbar>
+					<ToolbarSpacer />
+					<SearchField id="ID_PATIENTS_LAB_RESULTS_TEST_SEARCH"
+						liveChange="_handleLabResultsTestSearch" placeholder="{i18n>TXT_LAB_RESULT_TEST_SEARCHFIELD_PLACEHOLDER}"
+						width="40%" maxLength="50" selectOnFocus="false" />
+					<Button icon="sap-icon://group-2" press="onLabResultsByGroupPressed"
+						type="Emphasized" />
+					<Button icon="sap-icon://past" press="onLabResultsByDatePressed"
+						type="Emphasized" />
+				</Toolbar>
+			</headerToolbar>
+		</Table>
+
+	</Page>
+</core:View>

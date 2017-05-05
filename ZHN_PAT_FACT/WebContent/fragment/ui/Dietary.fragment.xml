@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Panel id="ID_PAT_DASH_DIETARY_PANEL" expandable="true"
+		expanded="false" headerText="{i18n>TXT_DIETARY_PANEL}" width="100%" visible="{Config>isPDDietaryPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem"  active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_DIETARY_PANEL}" />
+				<ToolbarSpacer />
+				<core:Icon id="ID_PAT_DASH_DIETARY_INDICATOR"
+					src="sap-icon://list" visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Table id="ID_PAT_DASH_DIETARY_TABL" growing="true"
+				growingThreshold="3" growingTriggerText="{i18n>LBL_LOAD_MORE_DATA}"
+				noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer />
+						<Button press="handleCreateDietary" icon="sap-icon://add" />
+						<Button icon="sap-icon://collapse-group" press="com.ril.hn.emrpatient.util.Utility.onTableCollapse" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left"
+						width="70%">
+						<Text text="{i18n>TXT_DIETARY_PANEL}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right"
+						width="30%">
+						<Text text="{i18n>TXT_PN_DATE_AND_TIME}" />
+					</Column>
+				</columns>
+			</Table>
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.onTableCollapseFooter" icon="sap-icon://collapse-group" />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+
+</core:FragmentDefinition>

@@ -1,0 +1,124 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns="sap.m" controllerName="com.ril.hn.emrpatient.controller.ActiveMedication"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="{i18n>TXT_MEDICATIONS_NEW}" showNavButton="true"
+		class="sapUiSizeCompact" navButtonPress="onNavBack">
+		<headerContent>
+			<Button tooltip="{i18n>TXT_MEDICATIONS}" text="{i18n>TXT_MEDICATIONS}"
+				type="Default" icon="sap-icon://pharmacy" press="_onMedicationOrderButtonPressed" />
+		</headerContent>
+		<content>
+			<ObjectHeader id="ID_PAT_DASH_MEDIC_OBJ_HEADER" title="{PatientHeader>NameLabel}"
+				iconDensityAware="false"
+				number="{path: 'PatientHeader>Birthdate', formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientAge'}"
+				numberUnit="({path: 'PatientHeader>Gender', formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientGender'})">
+				<attributes>
+					<ObjectAttribute
+						text="{i18n>TXT_SORT_PATIENT_ID} : {path: 'PatientHeader>ExternalPatientId',  formatter: 'com.ril.hn.emrpatient.util.Formatter.trimExtPatientId'}" />
+					<ObjectAttribute
+						text="{i18n>LBL_PATIENT_LOCATION} : {PatientHeader>CurrentLocation}"  visible="{Config>isPOLocationVisible}"/>
+					<ObjectAttribute
+						text="{i18n>TXT_ATTENDING_PHYSICIAN} : {PatientHeader>AttendingPhy}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'} : {path: 'PatientHeader>DateOfAdmission',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getFormattedDate'}"
+						state="None"></ObjectStatus>
+					<ObjectStatus icon="sap-icon://alert" visible="{PatientHeader>Attention}"
+						state="Error">
+					</ObjectStatus>
+					<ObjectStatus id="ID_PAT_DASH_MEDIC_OBJ_HEADER_TIME_FILTER"
+						text="" state="Success" visible="true"></ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+
+			<OverflowToolbar>
+				<Text text="" id="ID_PAT_DASH_MEDIC_TITLE" wrapping="true" />
+				<ToolbarSpacer />
+				<SearchField liveChange="_handlePatientsSearch"
+					placeholder="Drug Description" width="35%" maxLength="30"
+					selectOnFocus="false" id="ID_PAT_DASH_MEDIC_SEARCH" />
+				<Button id="ID_PAT_DASH_MEDIC_FILTER_POP" type="Emphasized"
+					icon="sap-icon://add-filter" press="_onOpenPopOver" />
+				<Button type="Emphasized" id="ID_PAT_DASH_MEDIC_HISTORY"
+					text="{i18n>TXT_MEDICATIONS_HIST}" press="onMedHistOrActMed"
+					app:dialogType="MedicationHistory" />
+				<Button type="Emphasized" id="ID_PAT_DASH_MEDIC_ACTIVEMEDIC"
+					text="{i18n>TXT_MEDICATIONS_NEW}" press="onMedHistOrActMed"
+					app:dialogType="ActiveMedication" />
+				<Button icon="sap-icon://sort" type="Emphasized" press="onMedHistOrActMedSort">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							moveToOverflow="true" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+
+			<Toolbar id="ID_PAT_DASH_MEDIC_HEADER_TB_MEDHIST">
+				<ToolbarSpacer />
+				<Button icon="sap-icon://navigation-left-arrow" press="onMedHistDateChange"
+					visible="true" type="Default" app:key="PAST"/>
+				<DatePicker id="ID_PAT_DASH_MEDIC_DATA_BY_DATE_DATEPICKER"
+					class="datePickerAreaWidth" placeholder="{i18n>TXT_LAB_RESULT_BY_DATE_PLACEHOLDER}"
+					width="25%" change="onMedHistDateChange" valueFormat="yyyy-MM-ddT00:00:00'"
+					displayFormat="long" />
+				<Button icon="sap-icon://navigation-right-arrow" press="onMedHistDateChange"
+					visible="true" type="Default" app:key="FUTURE"/>
+				<ToolbarSpacer />
+			</Toolbar>
+			<Table id="ID_PAT_DASH_MEDIC_DATA_TABLE" growing="true"
+				growingThreshold="100" growingTriggerText="{i18n>LBL_LOAD_MORE_DATA}" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+				<!-- <headerToolbar id="ID_PAT_DASH_MEDIC_HEADER_TB_MEDHIST"> <Toolbar> 
+					<ToolbarSpacer /> <Button icon="sap-icon://navigation-left-arrow" press="onMedicationHistoryDatePast" 
+					visible="true" type="Default" /> <DatePicker id="ID_PAT_DASH_MEDIC_DATA_BY_DATE_DATEPICKER" 
+					class="datePickerAreaWidth" placeholder="{i18n>TXT_LAB_RESULT_BY_DATE_PLACEHOLDER}" 
+					width="25%" change="onMedicationHistoryChange" valueFormat="yyyy-MM-ddT00:00:00'" 
+					displayFormat="long" /> <Button icon="sap-icon://navigation-right-arrow" 
+					press="onMedicationHistoryDateFuture" visible="true" type="Default" /> <ToolbarSpacer 
+					/> </Toolbar> </headerToolbar> -->
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="false" hAlign="Left" width="10%">
+						<header>
+							<ObjectStatus text="{i18n>TXT_ORDER_TYPE}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="false" hAlign="Left"
+						width="25%">
+						<header>
+							<ObjectStatus text="{i18n>TXT_DRUG}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<ObjectStatus text="{i18n>TXT_DOCUMENTS_STATUS}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<header>
+							<ObjectStatus text="{i18n>TXT_START_DATE}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<header>
+							<ObjectStatus text="{i18n>TXT_END_DATE}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<header>
+							<ObjectStatus text="{i18n>TXT_DURATION}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left" width="8%">
+						<header>
+							<ObjectStatus text="{i18n>TXT_PRN}" />
+						</header>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left" width="25%">
+						<header>
+							<ObjectStatus text="{i18n>TXT_COMMENTS}" />
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <Dialog showHeader="false">
+        <subHeader>
+            <Bar>
+                <contentMiddle>
+                    <Text text="{i18n>TXT_CLINICAL_TASK_PANEL}" />
+                </contentMiddle>
+            </Bar>
+        </subHeader>
+        <f:SimpleForm minWidth="1024" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+            <f:content>
+                <Label text="{i18n>TXT_PN_CATEGORY}" />
+                <Input placeholder="{i18n>TXT_PN_SELECT_CATEGORY}" id="ID_PHYSICIAN_ORDER_CATEGORY" valueHelpOnly="true" showValueHelp="true" showSuggestions="true" valueHelpRequest="handleValueHelpPhysicianOrderCategory" />
+                <Label text="{i18n>TXT_PN_NOTE}" />
+                <Input placeholder="{i18n>TXT_PN_ENTER_COMMENTS}" id="ID_PHYSICIAN_ORDER_TEXT" />
+            </f:content>
+        </f:SimpleForm>
+        <buttons>
+            <Button text="{i18n>TXT_SAVE}" type="Accept" press="handlePhysicianOrderSaveButton" />
+            <Button text="{i18n>TXT_CANCEL}" type="Reject"  app:dialogType="CreatePhysicianOrder" press="onDialogClose"/>
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

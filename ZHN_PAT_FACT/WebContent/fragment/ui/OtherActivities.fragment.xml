@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"  xmlns:l="sap.ui.layout"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Panel id="ID_PAT_DASH_OTHER_ACTIVITIES_PANEL" expandable="true"
+		expanded="false" headerText="{i18n>TXT_OTHER_ACTIVITIES}" width="100%" visible="{Config>isPDOthrActvPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem" active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_OTHER_ACTIVITIES}" />
+				<ToolbarSpacer />
+				<core:Icon  src="sap-icon://list"
+					visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<l:VerticalLayout width="100%" id="ID_PAT_DASH_VERT_LEFT">
+			<Link text="{i18n>TXT_TREATMENT_SHEET}" press="_onTreatmentSheetButtonPressed" />
+			<Link text="{i18n>TXT_HISTORY_AND_ASSESSMENT}" press="_onHistoryAndAssessmentButtonPressed" />
+		<!-- 	<Link text="{i18n>TXT_REFERRAL_ORDER_PANEL}" press="handleCreateReferralOrder" /> -->
+			<!-- <Link text="{i18n>TXT_CASE_ESTIMATION}" press="_onCaseEstimationButtonPressed" /> -->
+			<Link text="{i18n>TXT_PLANNED_DISCHARGE}" press="_onPlannedDischargeButtonPressed" />
+			<!-- <Link text="{i18n>TXT_SOAP_NOTE}" press="_onSOAPNoteButtonPressed" /> -->
+			<Link text="{i18n>TXT_INTAKE_OUTPUT}" press="onFullScreenBtnPress" app:fullScreenType="PatientsIntakeOutput"/>
+			<Link text="{i18n>TXT_IMAGES_PANEL}" press="onImagesButtonPressed" />
+			</l:VerticalLayout>
+			
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+
+</core:FragmentDefinition>

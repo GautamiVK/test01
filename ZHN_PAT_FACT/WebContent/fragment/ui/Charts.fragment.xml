@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:viz="sap.viz.ui5.controls" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Panel id="ID_PAT_DASH_CHART_PANEL" expandable="true" expanded="false"
+		headerText="{i18n>TXT_CHART_PANEL}" width="100%" visible="{Config>isPDChartsPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem" active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_CHART_PANEL}" />
+				<ToolbarSpacer />
+				<core:Icon id="ID_PAT_DASH_CHARTS_INDICATOR" src="sap-icon://list"
+					visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button press="handleVitalsAddBtnPress" icon="sap-icon://add" tooltip="{i18n>TXT_VITALS_CREATE}" />
+				<Button id="ID_PAT_DASH_VITALS_CHARTS_FULLECREEN" text="{i18n>TXT_VITALS_TITLE}"
+					press="onVitalsChartsFullScreenPressed" enabled="true" type="Transparent" />
+				<Button id="ID_PAT_DASH_SCORES_CHARTS_FULLECREEN" text="{i18n>TXT_SCORES_TITLE}" 
+					press="onScoresChartsFullScreenPressed" enabled="true" type="Transparent" visible="false"/>
+			</Toolbar>
+			<l:VerticalLayout width="100%">
+				<Text id="ID_PAT_DASH_CHARTS_STATUS" text="" />
+				<viz:Popover id="ID_POP_OVER_BP"></viz:Popover>
+				<viz:VizFrame id="ID_VIZ_FRAME_BP" uiConfig="{applicationSet:'fiori'}"
+					vizType="stacked_combination" width="100%" height="350px"></viz:VizFrame>
+				<viz:Popover id="ID_POP_OVER_TEMP"></viz:Popover>
+				<viz:VizFrame id="ID_VIZ_FRAME_TEMP" uiConfig="{applicationSet:'fiori'}"
+					vizType="stacked_combination" width="100%" height="350px"></viz:VizFrame>
+				<viz:Popover id="ID_POP_OVER_HR"></viz:Popover>
+				<viz:VizFrame id="ID_VIZ_FRAME_HR" uiConfig="{applicationSet:'fiori'}"
+					vizType="stacked_combination" width="100%" height="350px"></viz:VizFrame>
+			</l:VerticalLayout>
+
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+
+
+
+</core:FragmentDefinition>

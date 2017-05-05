@@ -1,0 +1,58 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Panel id="ID_PAT_DASH_ACTMED_PANEL" expandable="true" expanded="false"
+		headerText="{i18n>TXT_MEDICATIONS_NEW}" width="100%" visible="{Config>isPDActMedPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem" active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_MEDICATIONS_NEW}" />
+				<ToolbarSpacer />
+				<core:Icon id="ID_PAT_DASH_ACTMED_INDICATOR" src="sap-icon://list"
+					visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Table id="ID_PAT_DASH_ACTMED_TABL" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+				<headerToolbar>
+					<Toolbar>
+						<!-- <Text text="" id="ID_PAT_DASH_ACTMED_DATE_TITLE" wrapping="true" /> -->
+						<ToolbarSpacer />
+						<Button press="onMedicationButtonPressed" icon="sap-icon://add" />
+						<Select id="ID_PAT_DASH_ACTMED_FILTER" change="handleActiveMedicationFilter"
+							width="30%" selectedKey="" items="{ActMedFilter>/FilterSet}">
+							<items>
+								<core:Item key="{ActMedFilter>OrderTypeDesc}" text="{ActMedFilter>OrderTypeDesc}" />
+							</items>
+						</Select>
+						<Button id="ID_PAT_DASH_ACTMED_FULLECREEN" icon="sap-icon://full-screen"
+							press="onFullScreenBtnPress" app:fullScreenType="PatientsActiveMedication" enabled="true" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="false" hAlign="Left"
+						width="50%">
+						<Text text="{i18n>TXT_MEDICATIONS_NEW}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="{i18n>TXT_DOCUMENTS_STATUS}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<Text text="{i18n>TXT_START_DATE}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<Text text="{i18n>TXT_END_DATE}" />
+					</Column>
+				</columns>
+			</Table>
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.onTableCollapseFooter" icon="sap-icon://collapse-group" />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+
+</core:FragmentDefinition>

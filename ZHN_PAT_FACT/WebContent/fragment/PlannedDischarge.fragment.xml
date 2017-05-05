@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Dialog title="{i18n>TXT_PLANNED_DISCHARGE}" contentWidth="50%"
+		class="sapUiSizeCompact">
+		<content>
+			<f:SimpleForm maxContainerCols="2" editable="true"
+				layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" emptySpanL="0" emptySpanM="0" columnsL="1" columnsM="1"
+				visible="true" >
+				<f:content>
+					<core:Title id="ID_PLANNED_DISCHARGE_CORETITLE" />
+					<Label text="{i18n>TXT_PN_DATE_AND_TIME}" required="true" />
+					<DateTimeInput id="ID_PLANNED_DISCHARGE_DATETIME"
+						type="DateTime" displayFormat="dd MMM yyyy HH:mm" placeholder="{i18n>TXT_DATE_TIME_PLACEHOLDER}"
+						width="70%" change="dateChange" />
+					<Label text="Note" required="true"  />
+					<Input id="ID_PLANNED_DISCHARGE_NOTE" width="70%"
+						placeholder="{i18n>TXT_NOTE_MAX}" maxLength="50" />
+					<Label text="{i18n>TXT_DISCHARGE_TYPE}" />
+					<Select id="ID_PLANNED_DISCHARGE_TYPE" width="70%"
+						forceSelection="false" visible="false" selectedKey="1239102">
+						<core:Item key="AB" text="Absconded" />
+						<core:Item key="DE" text="Death" />
+						<core:Item key="EH" text="External Hosp" />
+						<core:Item key="EN" text="Early Neonatal" />
+						<core:Item key="LM" text="LAMA" />
+						<core:Item key="NL" text="Normal" />
+						<core:Item key="SB" text="Still Birth" />
+					</Select>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button text="{i18n>TXT_SAVE}" app:dialogType="PlannedDischarge"
+				press="onPlannedDischargeSavePressed" type="Accept" />
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>TXT_CANCEL}" app:dialogType="PlannedDischarge"
+				press="onDialogClose" type="Reject" />
+		</endButton>
+	</Dialog>
+
+</core:FragmentDefinition>

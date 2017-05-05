@@ -1,0 +1,156 @@
+<core:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:ui="sap.ca.ui"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:chart="sap.viz.ui5"
+	controllerName="com.ril.hn.emrpatient.controller.PatientDashboard"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<!-- <html:link rel="stylesheet" type="text/css" href="css/styles.css"></html:link> -->
+	<Page title="{i18n>MASTER_PAGE_TITLE}" showNavButton="true"
+		class="sapUiSizeCompact" navButtonPress="onNavBack">
+		<headerContent>
+			<Button tooltip="{i18n>TXT_CASES_AND_TIME_INTERVAL}" type="Transparent"
+				icon="sap-icon://time-entry-request" press="onCaseAndTimeIntervalsPressed" />
+			<!-- <Button tooltip="{i18n>TXT_MEDICATIONS}" type="Transparent" icon="sap-icon://pharmacy" 
+				press="_onMedicationButtonPressed" /> -->
+			<Button tooltip="{i18n>TXT_IMAGES_PANEL}" type="Transparent"
+				icon="sap-icon://image-viewer" press="onImagesButtonPressed"
+				visible="{Config>isPDImagesVisible}" />
+			<Button tooltip="{i18n>BTN_SAP_GUI}" icon="sap-icon://sap-logo-shape"
+				type="Emphasized" press="com.ril.hn.emrpatient.util.OrderManager.onSAPLogonOpen"
+				visible="{Config>isPDSAPGUIVisible}" />
+			<Button tooltip="{i18n>TXT_EDIT}" icon="sap-icon://action"
+				type="Transparent" press="onEditButtonPressed" visible="false" />
+
+		</headerContent>
+		<content>
+			<ObjectHeader id="ID_PAT_DASH_OBJ_HEADER" title="{PatientHeader>NameLabel}"
+				number="{path: 'PatientHeader>Birthdate',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientAge'}"
+				numberUnit="({path: 'PatientHeader>Gender',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientGender'})"
+				iconDensityAware="false">
+				<attributes>
+					<!-- <ObjectAttribute text="{PatientHeader>FreetextLabel}" /> -->
+					<ObjectAttribute
+						text="{i18n>TXT_SORT_PATIENT_ID}: {path: 'PatientHeader>ExternalPatientId',  formatter: 'com.ril.hn.emrpatient.util.Formatter.trimExtPatientId'}" />
+					<!-- <ObjectAttribute text="{i18n>TXT_CLINICAL_DESCRIPTION} : {path: 
+						'PatientHeader>ClinicalDescription', formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientClincalDesc'}" 
+						/> -->
+					<ObjectAttribute
+						text="{i18n>LBL_PATIENT_LOCATION} : {PatientHeader>CurrentLocation}"
+						visible="{Config>isPOLocationVisible}" />
+					<ObjectAttribute
+						text="{i18n>TXT_ATTENDING_PHYSICIAN} : {PatientHeader>AttendingPhy}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'} : {path: 'PatientHeader>DateOfAdmission',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getFormattedDate'}"
+						state="None">
+					</ObjectStatus>
+					<ObjectStatus icon="sap-icon://alert" visible="{PatientHeader>Attention}"
+						state="Error">
+					</ObjectStatus>
+					<ObjectStatus id="ID_PAT_DASH_PRIVATE_INSURED"
+						visible="{PatientHeader>PrivateInsured}">
+					</ObjectStatus>
+					<ObjectStatus id="ID_PAT_DASH_OBJ_HEADER_TIME_FILTER"
+						text="" state="Success" visible="true">
+					</ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			<OverflowToolbar width="100%">
+				<ToolbarSpacer />
+				<ToolbarSpacer />
+				<!-- <Button text="{i18n>TXT_MEDICATIONS_NEW}" press="_onMedicationHistoryButtonPressed" 
+					type="Transparent" visible="true" /> -->
+				<!-- <Button text="{i18n>TXT_MEDICATIONS}" icon="sap-icon://pharmacy" 
+					press="_onMedicationButtonPressed" type="Transparent" visible="true"/> -->
+				<Button text="{i18n>TXT_TREATMENT_SHEET}" icon="sap-icon://clinical-order"
+					press="_onTreatmentSheetButtonPressed" type="Transparent"
+					visible="{Config>isPDTreatmentsheetVisible}">
+				</Button>
+				<Button text="{i18n>TXT_HISTORY_AND_ASSESSMENT}" icon="sap-icon://customer-history"
+					press="_onHistoryAndAssessmentButtonPressed" type="Transparent"
+					visible="{Config>isPDHistAndAssmtVisible}">
+				</Button>
+				<Button text="{i18n>TXT_SOAP_NOTE_TITLE}" icon="sap-icon://notes"
+					press="_onSOAPNoteButtonPressed" type="Transparent"
+					visible="{Config>isPDSOAPNoteVisible}">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							stayInOverflow="{device>/isPhone}" />
+					</layoutData>
+				</Button>
+				<Button text="{i18n>TXT_REFRESH_ALL}" icon="sap-icon://refresh"
+					press="_onRefreshAllButtonPressed" type="Transparent">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							stayInOverflow="{device>/isPhone}" />
+					</layoutData>
+				</Button>
+				<Button text="{i18n>TXT_INTAKE_OUTPUT}" icon="sap-icon://order-status"
+					press="onFullScreenBtnPress" app:fullScreenType="PatientsIntakeOutput"
+					type="Transparent" visible="{Config>isPDIntakeOpVisible}">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							stayInOverflow="true" />
+					</layoutData>
+				</Button>
+				<Button text="{i18n>TXT_SERVICE_ORDERING_TITLE}" icon="sap-icon://order-status"
+					press="_onServiceOrderingButtonPressed" type="Transparent" visible="false">
+				</Button>
+				<!-- <Button text="{i18n>TXT_SOAP_NOTE}" icon="sap-icon://order-status" 
+					press="_onSOAPNoteButtonPressed" type="Transparent" visible="true"> <layoutData> 
+					<OverflowToolbarLayoutData stayInOverflow="true" /> </layoutData> </Button> -->
+				<!-- <Button text="{i18n>TXT_CASE_ESTIMATION}" icon="sap-icon://order-status" 
+					press="_onCaseEstimationButtonPressed" type="Transparent" visible="true"> 
+					<layoutData> <OverflowToolbarLayoutData stayInOverflow="true" /> </layoutData> 
+					</Button> -->
+				<Button text="{i18n>TXT_PLANNED_DISCHARGE}" icon="sap-icon://order-status"
+					press="_onPlannedDischargeButtonPressed" type="Transparent"
+					visible="{Config>isPDPlannedDischVisible}">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							stayInOverflow="true" />
+					</layoutData>
+				</Button>
+				<Button text="{i18n>TXT_REFERRAL_ORDER_PANEL}" icon="sap-icon://order-status"
+					press="handleCreateReferralOrder" type="Transparent" visible="false" />
+				<Button text="{i18n>TXT_EXPAND_ALL}" icon="sap-icon://expand-group"
+					press="onAllPanelsExpand" type="Transparent">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							stayInOverflow="{device>/isPhone}" />
+					</layoutData>
+				</Button>
+				<Button text="{i18n>TXT_COLLAPSE_ALL}" icon="sap-icon://collapse-group"
+					press="onAllPanelsCollapse" type="Transparent">
+					<layoutData>
+						<OverflowToolbarLayoutData
+							stayInOverflow="{device>/isPhone}" />
+					</layoutData>
+				</Button>
+			</OverflowToolbar>
+			<!-- <Toolbar design="Transparent"> <ToolbarSpacer /> <Button text="{i18n>TXT_MEDICATIONS}" 
+				icon="sap-icon://pharmacy" press="_onMedicationButtonPressed" type="Transparent" 
+				/> <Button text="{i18n>TXT_SERVICE_ORDERING_TITLE}" icon="sap-icon://order-status" 
+				press="_onServiceOrderingButtonPressed" type="Transparent" /> <Button text="{i18n>TXT_EXPAND_ALL}" 
+				icon="sap-icon://expand-group" press="_onAllPanelsExpand" type="Transparent" 
+				/> <Button text="{i18n>TXT_COLLAPSE_ALL}" icon="sap-icon://collapse-group" 
+				press="_onAllPanelsCollapse" type="Transparent" /> </Toolbar> -->
+			<l:Grid defaultSpan="L6 M12 S12" width="auto" position="Center"
+				vSpacing="10px">
+				<l:content>
+					<l:HorizontalLayout width="100%">
+						<l:VerticalLayout width="100%" id="ID_PAT_DASH_VERT_LEFT">
+						</l:VerticalLayout>
+					</l:HorizontalLayout>
+					<l:HorizontalLayout width="100%">
+						<l:VerticalLayout width="100%" id="ID_PAT_DASH_VERT_RIGHT">
+						</l:VerticalLayout>
+					</l:HorizontalLayout>
+				</l:content>
+			</l:Grid>
+		</content>
+		<footer>
+
+		</footer>
+	</Page>
+</core:View>

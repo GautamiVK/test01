@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="Print Treatment Sheet" contentWidth="50%">
+		<content>
+			<f:SimpleForm maxContainerCols="2" editable="true"
+				layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4"
+				emptySpanL="2" emptySpanM="2" columnsL="1" columnsM="1">
+				<f:content>
+					<Label text="Select Date" design="Bold" required="true" />
+					<DatePicker id="ID_TREATMENT_SHEET_DATE" valueFormat="dd.MM.yyyy"
+						displayFormat="dd.MM.yyyy" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="OK" type="Accept" press="onPrintTreatmentSheetOKPressed" />
+			<Button text="Cancel" type="Reject"
+				press="onDialogClose" app:dialogType="PrintTreatmentSheet"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

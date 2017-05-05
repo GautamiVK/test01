@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog showHeader="false">
+		<subHeader>
+			<Bar>
+				<contentMiddle>
+					<Text text="{i18n>TXT_REFERRAL_ORDER_PANEL}" />
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		<f:SimpleForm minWidth="1024" maxContainerCols="2"
+			editable="true" layout="ResponsiveGridLayout" labelSpanL="3"
+			labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1"
+			class="editableForm">
+			<f:content>
+				<Label text="{i18n>TXT_RO_TREATMENT_OU}" required="true" />
+				<Input type="Text" placeholder="{i18n>TXT_RO_TREATMENT_OU}" id="ID_CREATE_REFERRAL_ORDER_TREATMENT_OU" valueHelpOnly="true" showValueHelp="true" showSuggestions="true" valueHelpRequest="handleValueHelpReferralOrderTreatmentOU" />
+                <Label text="{i18n>TXT_RO_PHYSICIAN}" required="true" />
+			    <Input type="Text" placeholder="{i18n>TXT_RO_PHYSICIAN}" id="ID_CREATE_REFERRAL_ORDER_PHYSICIAN" valueHelpOnly="true" showValueHelp="true" showSuggestions="true" valueHelpRequest="handleValueHelpReferralOrderPhysician" enabled="false"/>
+               	<Label text="{i18n>TXT_RO_REASON}" />
+				<TextArea placeholder="{i18n>TXT_RO_REASON_ENTER}" id="ID_CREATE_REFERRAL_ORDER_COMMENT" />
+			</f:content>
+		</f:SimpleForm>
+		<buttons>
+			<Button text="{i18n>TXT_RELEASE}" type="Accept"
+				press="handleReferralOrderReleaseButton" />
+			<Button text="{i18n>TXT_CANCEL}" type="Reject"
+				app:dialogType="CreateReferralOrder" press="onDialogClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

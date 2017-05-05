@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog id="idIframeContent" contentWidth="100%" class="sapUiSizeCompact">
+		<l:HorizontalLayout  class="sapUiContentPadding"
+			width="100%">
+			<l:content>
+			</l:content>
+		</l:HorizontalLayout>
+		<endButton>
+			<Button text="Close" press="onDialogClose" app:dialogType="FioriApp" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

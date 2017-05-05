@@ -1,0 +1,75 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="com.ril.hn.emrpatient.controller.ClinicalOrder"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{i18n>TXT_CLINICAL_ORDER_PANEL}" showNavButton="true"
+		class="sapUiSizeCompact" navButtonPress="onNavBack">
+		<headerContent>
+			<Button tooltip="{i18n>TXT_CASES_AND_TIME_INTERVAL}" type="Transparent"
+				text="" icon="sap-icon://time-entry-request" press="onCaseAndTimeIntervalsPressed" />
+		</headerContent>
+		<content>
+			<ObjectHeader id="ID_PAT_DASH_OBJ_HEADER_CLINICAL_ORDER"
+				title="{PatientHeader>NameLabel}"
+				number="{path: 'PatientHeader>Birthdate',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientAge'}"
+				numberUnit="({path: 'PatientHeader>Gender',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getPatientGender'})"
+				iconDensityAware="false">
+				<attributes>
+					<ObjectAttribute
+						text="{i18n>TXT_SORT_PATIENT_ID} : {path: 'PatientHeader>ExternalPatientId',  formatter: 'com.ril.hn.emrpatient.util.Formatter.trimExtPatientId'}" />
+					<ObjectAttribute
+						text="{i18n>LBL_PATIENT_LOCATION} : {PatientHeader>CurrentLocation}"  visible="{Config>isPOLocationVisible}" />
+					<ObjectAttribute
+						text="{i18n>TXT_ATTENDING_PHYSICIAN} : {PatientHeader>AttendingPhy}" />
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'} : {path: 'PatientHeader>DateOfAdmission',  formatter: 'com.ril.hn.emrpatient.util.Formatter.getFormattedDate'}"
+						state="None">
+					</ObjectStatus>
+					<ObjectStatus icon="sap-icon://alert" visible="{PatientHeader>Attention}"
+						state="Error">
+					</ObjectStatus>
+					<ObjectStatus id="ID_PAT_DASH_OBJ_HEADER_CLINICAL_ORDER_TIME_FILTER"
+						text="" state="Success" visible="true">
+					</ObjectStatus>
+				</statuses>
+			</ObjectHeader>
+			<Table id="ID_PAT_DASH_CLINICAL_ORDER_FS_TABL" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer />
+						<!-- <SearchField liveChange="_handleClinicalOrderSearch" placeholder="{i18n>TXT_SEARCHFIELD_PLACEHOLDER}" 
+							width="40%" maxLength="30" selectOnFocus="false" /> -->
+						<Select id="ID_PAT_DASH_CLINICAL_ORDER_FS_FILTER" change="handleClinicalOrderFilter"
+							width="30%" selectedKey="">
+							<items>
+								<core:Item key="" text="All" />
+								<core:Item key="saved" text="Saved" />
+								<core:Item key="financially confirmed" text="Financially confirmed" />
+								<core:Item key="released" text="Released" />
+							</items>
+						</Select>
+						<Button press="handleCreateClinicalOrderFSPressed" icon="sap-icon://add"
+							type="Emphasized" />
+						<Button press="handleSettingsClinicalOrderFSPressed" icon="sap-icon://sort"
+							type="Emphasized" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left"
+						width="50%">
+						<Text text="{i18n>TXT_CO_TITLE}" />
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Center"
+						width="25%">
+						<Text text="{i18n>TXT_DOCUMENTS_STATUS}" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right"
+						width="25%">
+						<Text text="{i18n>TXT_DI_DATE}" />
+					</Column>
+				</columns>
+			</Table>
+		</content>
+	</Page>
+</core:View>

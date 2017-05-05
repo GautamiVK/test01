@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>TXT_ADHOC_SERVICES_PANEL}" showHeader="true"
+		class="sapUiSizeCompact" contentWidth="{device>/width}px" contentHeight="{device>/height}px">
+
+		<Table id="ID_PAT_DASH_ADHOC_SERVICES_LIST_TABL" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}"
+			 mode="MultiSelect" selectionChange="onServiceSelectionChange"> <!--  -->
+			<headerToolbar>
+				<Toolbar>
+					<ToolbarSpacer />
+					<SearchField id="ID_PAT_DASH_ADHOC_SERVICES_GRP_LIST"
+						liveChange="handleAdhocServiceSearch" placeholder="{i18n>TXT_SEARCH_SERVICE_PLACEHOLDER}"
+						width="80%" maxLength="30" selectOnFocus="false" />
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left"
+					width="50%">
+					<Text text="{i18n>TXT_ADHOC_SERVICE_NAME}" />
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left"
+					width="50%">
+					<Text text="{i18n>TXT_LAB_RESULT_BY_GROUP_TABL_LABEL}" />
+				</Column>
+			</columns>
+		</Table>
+		<beginButton>
+			<Button id="ID_PAT_DASH_ADHOC_SELECTED_COUNT" text="{i18n>TXT_ADHOC_SERVICES_SELECTED_COUNT}"
+				type="Emphasized" visible="true" press="handleAdhocServicesSelectedPressed" /> 
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>TXT_CLOSE}" type="Default" visible="true"
+				app:dialogType="AssignAdhocServices" press="onDialogClose" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

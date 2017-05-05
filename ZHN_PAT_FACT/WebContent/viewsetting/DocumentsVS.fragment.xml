@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="_handleDocSettingsConfirm" sortDescending="true" >
+		<sortItems>
+			<ViewSettingsItem text="{i18n>TXT_DO_DOC_NAME}" key="Title" selected="false" /> <!--  Title_ShortText -->
+			<ViewSettingsItem text="{i18n>TXT_CO_DEPARTMENT}" key="ServiceDepartment" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_MEDICATION_DETAIL_STATUS}" key="Status" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_PN_DATETIME}" key="Timestamp" selected="true" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

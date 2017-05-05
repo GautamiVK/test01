@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+
+	<Dialog title="{i18n>TXT_IO_DATE_FILTER}" icon="sap-icon://calendar">
+		<content>
+			<f:SimpleForm layout="ResponsiveLayout">
+				<f:content>
+					<Label text="{i18n>TXT_FROM_DATE_TIME}" design="Bold" />
+					<DateTimeInput id="ID_IO_FROMDATE" valueFormat="dd.MM.yyyy HH:mm" displayFormat="dd.MM.yyyy HH:mm" type="DateTime"/>
+					
+					<Label text="{i18n>TXT_TO_DATE_TIME}" design="Bold" />
+					<DateTimeInput id="ID_IO_TODATE" valueFormat="dd.MM.yyyy HH:mm" displayFormat="dd.MM.yyyy HH:mm" type="DateTime"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="{i18n>TXT_OK}" type="Accept" press="onIODateToFromOkPress" />
+			<Button text="{i18n>TXT_CANCEL}" type="Reject" press="onIODateToFromCancelPress" />
+		</buttons>
+	</Dialog>
+
+</core:FragmentDefinition>

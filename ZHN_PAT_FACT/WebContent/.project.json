@@ -1,0 +1,27 @@
+{
+  "dataBinding": {
+    "/view/Master.view.xml": {
+      "entitySet": ""
+    },
+    "/view/Details.view.xml": {
+      "entitySet": ""
+    },
+    "/view/Main.view.xml": {
+      "entitySet": "UNBINDKEY"
+    }
+  },
+  "generation": [
+    {
+      "templateId": "ui5template.fioriFullScreen",
+      "templateVersion": "1.4.0",
+      "dateTimeStamp": "Thu, 09 Jul 2015 11:22:42 GMT"
+    }
+  ],
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  }
+}

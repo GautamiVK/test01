@@ -1,0 +1,43 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:comm="sap.ui.commons"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Dialog id="ID_PAT_DASH_LAB_RESULTS_BY_GROUP_DIALOG"
+		title="Lab Results By Group" class="sapUiSizeCompact" >
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Label text="{i18n>TXT_LAB_RESULT_BY_GROUP_LABEL}" />
+				</contentMiddle>
+				<contentRight>
+					<Button id="ID_LAB_RESULTS_BY_GROUP_FS_SCROLL_LEFT"
+						icon="sap-icon://navigation-left-arrow" press="onGroupLeftScrollPressed"
+						enabled="false" />
+					<Button id="ID_LAB_RESULTS_BY_GROUP_FS_SCROLL_RIGHT"
+						icon="sap-icon://navigation-right-arrow" press="onGroupRightScrollPressed"
+						enabled="true" />
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<Table id="ID_PAT_DASH_LAB_RESULTS_BY_GROUP_TABL"
+			noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}">
+			<headerToolbar>
+				<Toolbar>
+					<ToolbarSpacer />
+					<Select id="ID_PAT_DASH_LAB_RESULTS_BY_GROUP_FILTER"
+						items="{LabResultsByGroupFilterModel>/LabResultUniqueGroupsData}"
+						change="onLabResultGroupChange">
+						<core:Item key="{LabResultsByGroupFilterModel>Group}"
+							text="{LabResultsByGroupFilterModel>Group}" />
+					</Select>
+					<ToolbarSpacer />
+				</Toolbar>
+			</headerToolbar>
+		</Table>
+		<beginButton>
+			<Button text="{i18n>TXT_CLOSE}" app:dialogType="LabResultsByGroup"
+				press="onDialogClose" />
+		</beginButton>
+	</Dialog>
+
+</core:FragmentDefinition>

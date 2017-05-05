@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:comm="sap.ui.commons">
+	<Popover title="{i18n>LBL_PATIENT_LOCATION}" class="sapUiSizeCompact"
+		placement="Auto" width="100%" icon="sap-icon://bed" showHeader="true">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<core:Icon src="sap-icon://bed" size="1.2rem" />
+					<Text text="{i18n>LBL_PATIENT_LOCATION}" />
+				</contentMiddle>
+			</Bar>
+		</customHeader>
+		<comm:Tree id="ID_LOCATION_TREE" visible="true" title=""
+			width="100%" height="145px" showHeader="true" showHeaderIcons="true"
+			minWidth="300px" selectionMode="None">
+			<comm:nodes />
+		</comm:Tree>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button press="onPopoverClose" text="{i18n>TXT_OK}" />
+			</Toolbar>
+		</footer>
+	</Popover>
+</core:FragmentDefinition>

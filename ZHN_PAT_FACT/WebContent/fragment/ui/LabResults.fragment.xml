@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Panel id="ID_PAT_DASH_LAB_RESULTS_PANEL" expandable="true"
+		expanded="false" headerText="{i18n>TXT_LAB_RESULTS_PANEL}" width="100%" visible="{Config>isPDLabResultPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem"  active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_LAB_RESULTS_PANEL}" />
+				<ToolbarSpacer />
+				<core:Icon id="ID_PAT_DASH_LAB_RESULTS_INDICATOR"
+					src="sap-icon://list" visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Table id="ID_PAT_DASH_LAB_RESULTS_TABL" noDataText="{i18n>TXT_NO_INFORMATION_AVAILABLE}"
+				growing="true" growingThreshold="3" growingTriggerText="{i18n>LBL_LOAD_MORE_DATA}">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer />
+						<Button id="ID_LAB_RESULTS_SCROLL_LEFT" icon="sap-icon://navigation-left-arrow"
+							press="onLeftScrollPressed" enabled="false" />
+						<Button id="ID_LAB_RESULTS_SCROLL_RIGHT" icon="sap-icon://navigation-right-arrow"
+							press="onRightScrollPressed" enabled="true" />
+							<!-- <Button id="ID_LAB_RESULTS_FULLECREEN" icon="sap-icon://full-screen"
+							press="onLabResultsFullScreenPressed" enabled="true" app:fullScreenType="PatientsLabResults"/> -->
+							<Button id="ID_LAB_RESULTS_FULLECREEN" icon="sap-icon://full-screen"
+							press="onFullScreenBtnPress" enabled="true" app:fullScreenType="PatientsLabResults"/>
+					</Toolbar>
+				</headerToolbar>
+			</Table>
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+
+</core:FragmentDefinition>

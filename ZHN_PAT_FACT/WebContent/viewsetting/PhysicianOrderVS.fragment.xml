@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handlePOSettingsConfirm" sortDescending="true" >
+		<sortItems>
+			<ViewSettingsItem text="{i18n>TXT_CT_TASK}" key="Text" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_PD_PHYSICIAN}" key="CreatorName" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_MEDICATION_DETAIL_STATUS}" key="Status" selected="false" />
+			<ViewSettingsItem text="{i18n>TXT_PN_DATETIME}" key="CreatedOn" selected="true" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,72 @@
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns="sap.m" xmlns:table="sap.ui.table"
+	controllerName="com.ril.hn.emrpatient.controller.PatientOverview">
+	<Page title="{i18n>MASTER_PAGE_TITLE}" showNavButton="true"
+		navButtonPress="onNavBack" class="sapUiSizeCompact" backgroundDesig="Transparent">
+		<content>
+			<Table id="ID_PATIENTS_MASTER_TABL" noDataText="{i18n>LBL_NO_PATIENT_DATA}"
+				growing="true" growingThreshold="100" growingTriggerText="More">
+				<!-- Searching , Filtering , Sorting options -->
+				<headerToolbar>
+					<Toolbar id="tableToolbar">
+						<Label id="ID_PATIENTS_COUNT" text="" />
+						<ToolbarSpacer />
+						<SearchField id="ID_PATIENTS_SEARCH" liveChange="handlePatientsSearch"
+							placeholder="{i18n>TXT_SEARCHFIELD_PLACEHOLDER}" width="40%"
+							maxLength="30" selectOnFocus="false" />
+						<!-- <Select id="ID_PATIENTS_FILTER" items="{FilterDataModel>/FilterData}" 
+							change="onFilterSelectAndClose" width="25%"> <core:Item key="{FilterDataModel>SearchName}*{FilterDataModel>SearchParameter}" 
+							text="{parts:[{path:'FilterDataModel>SubName'}, {path:'FilterDataModel>SearchName'}] 
+							, formatter: 'com.ril.hn.emrpatient.util.Formatter.getFilterSubname'}" /> 
+							</Select> -->
+						<Button icon="sap-icon://sort" press="onSortDialogOpen"
+							type="Emphasized" />
+						<Button type="Emphasized" icon="sap-icon://filter" press="onWardFilterOpen" visible="{Config>isPOWardSelectionAllowed}"/>
+					</Toolbar>
+					
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left"
+						width="25%">
+						<Label text="{i18n>LBL_PATIENT_NAME}" design="Bold" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Label text="{i18n>LBL_PATIENT_DOB}" design="Bold" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Label text="{path : 'Config>configType' , formatter : 'com.ril.hn.emrpatient.util.Formatter.getIPOPBedHeaderText'}" design="Bold" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Left">
+						<Label text="{i18n>TXT_CO_DEPARTMENT}" design="Bold" />
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Label text="{i18n>LBL_PATIENT_WARD}" design="Bold" />
+					</Column>
+					 <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" visible="{Config>isPOBedAvailable}">
+						<Label text="{i18n>TXT_BED}" design="Bold" />
+					</Column> 
+					 <Column minScreenWidth="Phone" demandPopin="true" hAlign="Right" width="4%">
+						<!-- <Label text="{i18n>LBL_PATIENT_FAVOURITE}" design="Bold"
+							visible="{device>/isPhone}" /> -->
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Center" width="4%">
+						<!-- <Label text="{i18n>LBL_PATIENT_LOCATION}" design="Bold"
+							visible="{device>/isPhone}" /> -->
+					</Column>
+					<Column minScreenWidth="Phone" demandPopin="true" hAlign="Left"
+						width="4%">
+						<!-- <Label text="{i18n>LBL_PATIENT_ATTENTION}" design="Bold"
+							visible="{device>/isPhone}" /> -->
+					</Column> 
+				</columns>
+			</Table>
+			<!-- Global search -->
+			<FlexBox width="100%" alignItems="Center" justifyContent="Center">
+				<Button id="ID_PATIENTS_SERVER" text="{i18n>TXT_CONTINUE_SEARCH_ON_SERVER}"
+					press="getPatientsFromServer" visible="false" type="Default" />
+			</FlexBox>
+		</content>
+		<footer>
+		</footer>
+	</Page>
+</core:View>

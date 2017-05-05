@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:l="sap.ui.layout">
+
+	<Panel id="ID_PAT_DASH_ALLERGIES_AND_RISKS_PANEL" expandable="true"
+		expanded="false" headerText="{i18n>TXT_ALLERGIES_AND_RISKS_PANEL}"
+		width="100%" visible="{Config>isPDAlrgyAndRiskPanelVisible}">
+		<headerToolbar>
+			<Toolbar height="2.7rem" active="true"
+				press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapse">
+				<Label text="{i18n>TXT_ALLERGIES_AND_RISKS_PANEL}" />
+				<ToolbarSpacer />
+				<core:Icon id="ID_PAT_DASH_ALLERGIES_AND_RISKS_INDICATOR"
+					src="sap-icon://list" visible="true" size="1.2rem" color="#ff0000" />
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Toolbar>
+					<Text id="ID_PAT_DASH_ALLERGIES_STATUS" text="" wrapping="true"/>
+					<ToolbarSpacer />
+					<Button id="ID_PAT_DASH_ALLERGIES_STATUS_CHANGE"  text="{i18n>TXT_NO_ALLERGIES}" type="Emphasized" visible="false" press="onAllergiesStatusChangeBtnPressed"/>
+					<Button id="ID_PAT_DASH_ALLERGIES_ADD"  icon="sap-icon://add" type="Emphasized" visible="true" press="onAllergiesAddBtnPressed"/>
+			</Toolbar>
+			<!-- <Label id="ID_PAT_DASH_ALLERGIES_STATUS" text="" design="Standard" 
+				textAlign="End" width="100%" /> -->
+			<l:VerticalLayout>
+				<!-- <ObjectIdentifier id="ID_PAT_DASH_ALLERGIES" title="" text="Allergies" 
+					titleActive="true" titlePress="onAllergiesTitlePress" /> <ObjectIdentifier 
+					id="ID_PAT_DASH_RISKS" title="" text="Risks" titleActive="true" titlePress="onRisksTitlePress"/> -->
+				<Text text="{i18n>TXT_ALLERGIES}" />
+				<Link id="ID_PAT_DASH_ALLERGIES" text="" emphasized="true"
+					press="onAllergiesTitlePress" wrapping="true" />
+				<Text text="{i18n>TXT_RISKS}" />
+				<Link id="ID_PAT_DASH_RISKS" text="" emphasized="true"
+					press="onRisksTitlePress" wrapping="true" />
+
+			</l:VerticalLayout>
+
+			<Toolbar height="2.7rem"
+				visible="{ parts : [ {path : 'device>/isPhone'} , {path : 'device>/isTablet'}], formatter : 'com.ril.hn.emrpatient.util.Formatter.getFooterToolbarVisibility'}">
+				<ToolbarSpacer />
+				<Button press="com.ril.hn.emrpatient.util.Utility.handlePanelManualExpandCollapseFooter" text="{i18n>TXT_COLLAPSE}" />
+			</Toolbar>
+		</content>
+	</Panel>
+</core:FragmentDefinition>

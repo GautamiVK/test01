@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+	<Dialog title="{i18n>TXT_ALLERGIES_TABLE_TITLE}" contentWidth="50%"
+		class="sapUiSizeCompact">
+		<content>
+			<f:SimpleForm layout="ResponsiveLayout" editable="true">
+				<f:content>
+					<Label text="{i18n>TXT_COMMENTS}" required="true" />
+					<Input type="Text" id="ID_ALLERGY_EDIT_COMMENT" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button text="{i18n>TXT_SAVE}" app:dialogType="Allergies"
+				press="onAllergyEditSavePressed" type="Accept" />
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>TXT_CANCEL}" app:dialogType="EditAllergies"
+				press="onDialogClose" type="Reject" />
+		</endButton>
+	</Dialog>
+
+</core:FragmentDefinition>
